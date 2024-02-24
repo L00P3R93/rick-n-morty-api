@@ -8,7 +8,7 @@ interface SubTitleProps {
     mb?: number
 }
 
-const StyledSubTitle = styled.h2<{align; mt; mb}>`
+const StyledSubTitle = styled.h2<{align:string; mt:number; mb:number}>`
     font-size: 22px;
     text-align: ${(props) => props.align};
     width: 100%;

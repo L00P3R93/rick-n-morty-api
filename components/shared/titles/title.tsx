@@ -8,7 +8,7 @@ interface TitleProps {
     mb?: number
 }
 
-const StyledTitle = styled.h1<{align; mt; mb}>`
+const StyledTitle = styled.h1<{align:string; mt:number; mb:number;}>`
     font-size: 32px;
     text-align: ${(props) => props.align};
     width: 100%;
