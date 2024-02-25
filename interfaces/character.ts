@@ -5,5 +5,5 @@ import { Location } from "./location";
 export interface CharacterFullData extends Character {
     origin: Location
     location: Location
-    episode: Episode
+    episode: Episode[]
 }

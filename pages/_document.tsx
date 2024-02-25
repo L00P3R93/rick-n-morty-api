@@ -1,4 +1,3 @@
-import { init } from 'next/dist/compiled/webpack/webpack';
 import Document, { DocumentContext } from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
