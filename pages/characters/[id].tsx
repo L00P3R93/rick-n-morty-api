@@ -19,7 +19,7 @@ const CharacterContainer = styled.section`
     gap: 16px;
 
     .image-container {
-        width: 30%;
+        /*width: 30%;*/
     }
 
     .info-container {

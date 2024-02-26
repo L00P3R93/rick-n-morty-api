@@ -9,7 +9,7 @@ interface CardProps {
 };
 
 
-const ImageWrapper = styled.div<{imageUrl: string}>`
+const ImageWrapper = styled.div<{$imageUrl: string}>`
     position: relative;
     height: 300px;
     width: 250px;
@@ -30,7 +30,7 @@ const ImageWrapper = styled.div<{imageUrl: string}>`
         width: 100%;
         height: 100%;
         opacity: 0.4;
-        background-image: url(${(props) => props.imageUrl});
+        background-image: url(${(props) => props.$imageUrl});
         background-repeat: no-repeat;
         background-position: 50% 0;
         background-size: cover;
@@ -65,7 +65,7 @@ const LinkCard: React.FC<CardProps> = ({name, imageUrl, linkUrl}) => {
     }, [linkUrl, router]);
 
     return (
-        <ImageWrapper imageUrl={imageUrl} onClick={handleClick}>
+        <ImageWrapper $imageUrl={imageUrl} onClick={handleClick}>
             <Content>{name}</Content>
         </ImageWrapper>
     );

@@ -8,7 +8,7 @@ interface ChipProps {
     onClick?: (id: string) => void
 };
 
-const Container = styled.span<{isClickable: boolean}>`
+const Container = styled.span<{$isClickable: boolean}>`
     margin-right: 10px;
     margin-bottom: 6px;
     border: 1px solid white;
@@ -20,13 +20,13 @@ const Container = styled.span<{isClickable: boolean}>`
 
     &:hover {
         background-color: black;
-        cursor: ${(props) => (props.isClickable ? 'pointer' : 'default')};
+        cursor: ${(props) => (props.$isClickable ? 'pointer' : 'default')};
     }
 `;
 
 const Chip: React.FC<ChipProps> = ({id, text, isClickable, onClick}) => {
     return (
-        <Container isClickable={isClickable} onClick={() => onClick(id)}>
+        <Container $isClickable={isClickable} onClick={() => onClick(id)}>
             {text}
         </Container>
     );

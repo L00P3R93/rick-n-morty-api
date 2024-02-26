@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useRouter } from "next/router";
 import { Character } from "@/interfaces/characters";
 
-const ImageWrapper = styled.div<{ imageUrl: string }>`
+const ImageWrapper = styled.div<{ $imageUrl: string }>`
     position: relative;
     height: 280px;
     width: 250px;
@@ -19,7 +19,7 @@ const ImageWrapper = styled.div<{ imageUrl: string }>`
         top: 0;
         width: 100%;
         height: 100%;
-        background-image: url(${(props) => props.imageUrl});
+        background-image: url(${(props) => props.$imageUrl});
         background-repeat: no-repeat;
         background-position: 50% 0;
         background-size: cover;
@@ -62,7 +62,7 @@ const CharacterCard: React.FC<Character> = ({gender, image, name, species, statu
     }, [id, router]);
 
     return(
-        <ImageWrapper imageUrl={image} onClick={handleClick}>
+        <ImageWrapper $imageUrl={image} onClick={handleClick}>
             <Content>
                 <p>Name: {name}</p>
                 <p>Species: {species}</p>

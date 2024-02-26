@@ -49,7 +49,7 @@ const LinksContainer = styled.div`
     align-items: center;
 `;
 
-const StyledLink = styled.a`
+const StyledLink = styled.span`
     margin-left: 16px;
     font-size: 18px;
     cursor: pointer;

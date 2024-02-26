@@ -9,7 +9,7 @@ import PageLayout from "@/layouts/page-layout";
 const backgroundImage = 'https://www.hollywoodreporter.com/wp-content/uploads/2018/05/edc9bf26-65c3-49c4-8822-97738260a449-1.png'
 
 const headContext: HeadContext = {
-	title: 'Rick N Morty API Challenge',
+	title: 'Rick N Morty',
 	meta: [
 		{
 			name: 'description',
@@ -18,7 +18,7 @@ const headContext: HeadContext = {
 	],
 };
 
-const BgWrapper = styled.div<{backgroundImage: string}>`
+const BgWrapper = styled.div<{$backgroundImage: string}>`
 	position: relative;
 	height: 100%;
 	display: flex;
@@ -33,7 +33,7 @@ const BgWrapper = styled.div<{backgroundImage: string}>`
 		width: 100%;
 		height: 100%;
 		opacity: 0.1;
-		background-image: url(${(props) => props.backgroundImage});
+		background-image: url(${(props) => props.$backgroundImage});
 		background-repeat: no-repeat;
 		background-position: 50% 0;
 		background-size: cover;
@@ -60,7 +60,7 @@ const Content = styled.section`
 const Main: React.FC = () => {
 	return (
 		<PageLayout headContext={headContext}>
-			<BgWrapper backgroundImage={backgroundImage}>
+			<BgWrapper $backgroundImage={backgroundImage}>
 				<Header>
 					<Title mb={16} align='center'>Rick N Morty</Title>
 					<SubTitle align="center">{'What would you like to explore ??'}</SubTitle>
