@@ -10,6 +10,7 @@ interface CharacterNotesProps {
 interface Note {
     id: string;
     content: string;
+    date_added: Date;
 }
 
 const CharacterNotes: React.FC<CharacterNotesProps> = ({ characterId }) => {
@@ -54,7 +55,10 @@ const CharacterNotes: React.FC<CharacterNotesProps> = ({ characterId }) => {
             {existingNotes.length > 0 ? (
                 <NotesList>
                     {existingNotes.map(note => (
-                        <NoteItem key={note.id}>{note.content}</NoteItem>
+                        <NoteItem key={note.id}>
+                            <NoteContent>{note.content}</NoteContent>
+                            <NoteDate>{formatDate(note.date_added)}</NoteDate>
+                        </NoteItem>
                     ))}
                 </NotesList>
             ) : (
@@ -77,6 +81,17 @@ const CharacterNotes: React.FC<CharacterNotesProps> = ({ characterId }) => {
     );
 };
 
+const formatDate = (date: Date): string => {
+    return new Date(date).toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+        hour12: true
+    });
+}
+
 
 const NotesWrapper = styled.div`
     font-size: 14px;
@@ -88,6 +103,9 @@ const NotesList = styled.ul`
 `;
 
 const NoteItem = styled.li`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     border: 1px solid #ccc;
     border-radius: 4px;
     padding: 10px;
@@ -97,6 +115,12 @@ const NoteItem = styled.li`
 
 const NoNotesMessage = styled.p`
     color: #888;
+`;
+
+const NoteContent = styled.div``;
+
+const NoteDate = styled.div`
+    color: #999;
 `
 
 const NotesText = styled.textarea`
