@@ -13,7 +13,7 @@ interface Note {
 // Open an instance of the SQLite DB connection.
 async function dbInstance() {
     return open({
-        filename: './notes.db',
+        filename: 'notes.db',
         driver: sqlite3.Database
     });
 };
