@@ -17,11 +17,15 @@ import CharacterNotes from "@/components/pages/charactersPage/characterNotes";
 const CharacterContainer = styled.section`
     width: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 16px;
 
-    .image-container {
-        /*width: 30%;*/
+    @media screen and (min-width: 768px) {
+        flex-direction: row;
+    }
+
+    /*.image-container {
+        width: 30%;
     }
 
     .info-container {
@@ -30,6 +34,26 @@ const CharacterContainer = styled.section`
         p {
             margin-bottom: 16px;
         }
+    }*/
+`;
+
+const CharacterInfoContainer = styled.div`
+    width: 100%;
+    font-size: 18px;
+    p {
+        margin-bottom: 16px;
+    }
+
+    @media screen and (min-width: 768px) {
+        width: 70%;
+    }
+`;
+
+const CharacterImageContainer = styled.div`
+    width: 100%;
+
+    @media screen and (min-width: 768px){
+        width: 30%;
     }
 `;
 
@@ -73,16 +97,16 @@ const Character: React.FC<{data: {character: CharacterFullData}}> = ({data}) => 
             <ContentContainer>
                 <Title align="center" mb={18}>{name}</Title>
                 <CharacterContainer>
-                    <div className="image-container">
+                    <CharacterImageContainer>
                         <Image 
                             style={{ borderRadius: '8px' }}
                             src={image}
                             alt="CHARACTER_IMG"
-                            width={500}
-                            height={500}
+                            width={350}
+                            height={350}
                         />
-                    </div>
-                    <div className="info-container">
+                    </CharacterImageContainer>
+                    <CharacterInfoContainer>
                         <p>{`Character name: ${name}`}</p>
                         <p>{`Gender: ${gender}`}</p>
                         <p>{`Species: ${species}`}</p>
@@ -107,7 +131,7 @@ const Character: React.FC<{data: {character: CharacterFullData}}> = ({data}) => 
                         )}
 
                         <CharacterNotes characterId={data.character.id} />
-                    </div>
+                    </CharacterInfoContainer>
                 </CharacterContainer>
             </ContentContainer>
         </PageLayout>
