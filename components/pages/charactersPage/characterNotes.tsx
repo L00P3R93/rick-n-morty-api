@@ -49,24 +49,77 @@ const CharacterNotes: React.FC<CharacterNotesProps> = ({ characterId }) => {
     };
 
     return (
-        <div>
-            <SubTitle align="center" mb={16} mt={26}>Character Notes</SubTitle>
-            <ul>
-                {existingNotes.map(note => (
-                    <li key={note.id}>{note.content}</li>
-                ))}
-            </ul>
-            <SubTitle align="center" mb={16} mt={20}>New Note</SubTitle>
+        <NotesWrapper>
+            <SubTitle align="left" mb={16} mt={26}>Notes</SubTitle>
+            {existingNotes.length > 0 ? (
+                <NotesList>
+                    {existingNotes.map(note => (
+                        <NoteItem key={note.id}>{note.content}</NoteItem>
+                    ))}
+                </NotesList>
+            ) : (
+                <NoNotesMessage>No Notes Available!</NoNotesMessage>
+            )}
+           
+            <SubTitle align="left" mb={16} mt={20}>Add Note</SubTitle>
             <form onSubmit={handleSubmit}>
-                <textarea
+                <NotesText
+                    cols={40}
+                    rows={5}
                     value={newNote}
                     onChange={handleNoteChange}
                     placeholder="Add New Note"
                 />
-                <button type="submit">Save</button>
+                <br />
+                <NotesButton type="submit">Save</NotesButton>
             </form>
-        </div>
+        </NotesWrapper>
     );
 };
+
+
+const NotesWrapper = styled.div`
+    font-size: 14px;
+`;
+
+const NotesList = styled.ul`
+    list-style-type: none;
+    padding: 0;
+`;
+
+const NoteItem = styled.li`
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: transparent;
+`;
+
+const NoNotesMessage = styled.p`
+    color: #888;
+`
+
+const NotesText = styled.textarea`
+    color: #22222e;
+    padding: 10px auto;
+`;
+
+const NotesButton = styled.button`
+    background-color: transparent;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 6px;
+    border: 1px solid white;
+    border-radius: 4px;
+    padding: 6px;
+    display: inline-block;
+    font-size: 14px;
+    transition: all 0.3s;
+
+    &:hover {
+        background-color: black;
+        cursor: 'pointer';
+    }
+`
 
 export default CharacterNotes;

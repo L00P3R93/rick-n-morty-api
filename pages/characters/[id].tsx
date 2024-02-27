@@ -1,7 +1,7 @@
 import { GetServerSideProps } from "next"; 
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import styled from "styled-components";
 import Chip from "@/components/shared/chip";
 import ContentContainer from "@/components/shared/containers/contentContainer";
@@ -11,6 +11,8 @@ import GET_CHARACTER from "@/gql/queries/character";
 import { CharacterFullData } from "@/interfaces/character";
 import { HeadContext } from "@/interfaces/head";
 import PageLayout from "@/layouts/page-layout";
+import CharacterNotes from "@/components/pages/charactersPage/characterNotes";
+
 
 const CharacterContainer = styled.section`
     width: 100%;
@@ -31,11 +33,27 @@ const CharacterContainer = styled.section`
     }
 `;
 
+const ShowMoreButton = styled.button`
+    background-color: transparent;
+    border: none;
+    color: blue;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+
+    &:hover {
+        color: white;
+        cursor: 'pointer';
+    }
+`;
+
 const Character: React.FC<{data: {character: CharacterFullData}}> = ({data}) => {
     const router = useRouter();
     const { episode: episodes, gender, image, location, name, origin, species, status } = data.character;
     const { name: originName, dimension: originDimension, type: originType } = origin;
     const { name: locationName, dimension: locationDimension, type: locationType } = location;
+
+    const [showAllEpisodes, setShowAllEpisodes] = useState(false);
 
     const headContext: HeadContext = useMemo(() => ({
         title: `Character | ${name}`,
@@ -45,6 +63,10 @@ const Character: React.FC<{data: {character: CharacterFullData}}> = ({data}) => 
     const handleClick = useCallback((id: string) => {
         router.push(`/episodes/${id}`);
     }, [router]);
+
+    const handleShowMoreClick = () => {
+        setShowAllEpisodes((prevState) => !prevState);
+    }
 
     return (
         <PageLayout headContext={headContext}>
@@ -68,9 +90,23 @@ const Character: React.FC<{data: {character: CharacterFullData}}> = ({data}) => 
                         <p>{`Origin: ${originName}, ${originDimension}, ${originType}`}</p>
                         <p>{`Location (last seen): ${locationName}, ${locationDimension}, ${locationType}`}</p>
                         <p>{`List of episodes:`}</p>
-                        {episodes.map(({id, name}) => (
-                            <Chip key={id} text={`#${id} - ${name}`} isClickable={true} onClick={handleClick} id={id} />
-                        ))}
+                        {episodes.length > 5 ? (
+                            episodes.slice(0, showAllEpisodes? episodes.length : 5).map(({id, name}) => (
+                                <Chip key={id} text={`#${id} - ${name}`} isClickable={true} onClick={handleClick} id={id} />
+                            ))
+                        ) : (
+                            episodes.map(({id, name}) => (
+                                <Chip key={id} text={`#${id} - ${name}`} isClickable={true} onClick={handleClick} id={id} />
+                            ))
+                        )}
+
+                        {episodes.length > 5 && (
+                            <ShowMoreButton onClick={handleShowMoreClick}>
+                                {showAllEpisodes ? "Show Less" : "Show More"}
+                            </ShowMoreButton>
+                        )}
+
+                        <CharacterNotes characterId={data.character.id} />
                     </div>
                 </CharacterContainer>
             </ContentContainer>
