@@ -23,18 +23,6 @@ const CharacterContainer = styled.section`
     @media screen and (min-width: 768px) {
         flex-direction: row;
     }
-
-    /*.image-container {
-        width: 30%;
-    }
-
-    .info-container {
-        width: 70%;
-        font-size: 18px;
-        p {
-            margin-bottom: 16px;
-        }
-    }*/
 `;
 
 const CharacterInfoContainer = styled.div`
